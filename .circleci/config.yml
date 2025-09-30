@@ -3,31 +3,42 @@ version: 2.1
 jobs:
   ui-tests:
     docker:
-      - image: cimg/node:22.4.0-browsers  # Node 22 + Chrome preinstalled
+      - image: cimg/node:22.4.0-browsers  # Node 22 with browsers
     environment:
-      # Chrome binary for Nightwatch headless
       CHROME_BIN: /usr/bin/google-chrome
     steps:
-      - browser-tools/install-browser-tools
       - checkout
 
       # Install dependencies from package-lock.json
       - run:
-          name: Install dependencies
+          name: Install npm dependencies
           command: npm ci
 
-      # Verify Node, npm, and Chrome versions
+      # Install Google Chrome stable in container
       - run:
-          name: Check Node, npm, Chrome2
+          name: Install Google Chrome
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y wget gnupg2
+            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+            sudo apt-get update
+            sudo apt-get install -y google-chrome-stable
+            $CHROME_BIN --version
+
+      # Print Node and npm versions for verification
+      - run:
+          name: Check Node & npm
           command: |
             node -v
             npm -v
-            $CHROME_BIN --version
 
-      # Run Nightwatch tests
+      # Run Nightwatch tests in headless Chrome
       - run:
           name: Run Nightwatch tests
-          command: npx nightwatch --env chrome
+          command: |
+            export CHROME_BIN=/usr/bin/google-chrome
+            npx nightwatch --env chrome
 
 workflows:
   version: 2
