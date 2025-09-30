@@ -65,26 +65,15 @@ module.exports = {
             '--disable-dev-shm-usage',
             '--disable-gpu',
             '--window-size=1920,1080'
-          ]
+          ],
+          binary: process.env.CHROME_BIN || "/usr/bin/google-chrome"
         }
       },
       reporter: (results, done) => {
         reporter.fn(results, done);
       },
       chrome_headless: {
-      desiredCapabilities: {
-        browserName: 'chrome',
-        'goog:chromeOptions': {
-          binary: process.env.CHROME_BIN || '/usr/bin/google-chrome',
-          args: [
-            '--headless',
-            '--no-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-gpu',
-            '--window-size=1920,1080'
-          ]
-        }
-      }
+      extends: "default"
     },
  // Add reporters here
 //  reporters: [
