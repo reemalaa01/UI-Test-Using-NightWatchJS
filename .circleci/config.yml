@@ -3,31 +3,27 @@ version: 2.1
 jobs:
   ui-tests:
     docker:
-      - image: cimg/node:22.4.0-browsers  # Node 22 + Firefox/Chrome preinstalled
+      - image: cimg/node:22.4.0-browsers  # Node 22 + browsers preinstalled
     steps:
       - checkout
 
-      # Confirm Node and npm version
+      # Print Node, npm, Firefox versions for debugging
       - run:
-          name: Check Node & npm
+          name: Check Node, npm, Firefox
           command: |
             node -v
             npm -v
-            which node
-            which npm
+            firefox --version
 
       # Install dependencies
       - run:
           name: Install dependencies
           command: npm ci
 
-      # Run Nightwatch tests with Firefox in headless mode
+      # Run Nightwatch tests with Firefox headless
       - run:
-    name: Run Nightwatch tests
-    command: |
-      export CHROME_BIN=/usr/bin/google-chrome
-      npx nightwatch --env chrome_headless
-
+          name: Run Nightwatch tests
+          command: npx nightwatch --env firefox
 
 workflows:
   version: 2
