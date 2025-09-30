@@ -10,13 +10,11 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
-          name: Run Nightwatch UI tests
-          command: |
-            export CHROME_BIN="/usr/bin/google-chrome"
-            npx nightwatch --headless
+          name: Run Nightwatch tests
+          command: npm test
 
 workflows:
   version: 2
-  test_pipeline:
+  test-workflow:
     jobs:
       - ui-tests
