@@ -65,41 +65,41 @@ module.exports = {
               });
             });
           },
-          async getProductReferences(elementDef) {
-            const browser = this.api;
-            return new Promise((resolve, reject) => {
-              browser.elements(elementDef.locateStrategy, elementDef.selector, function(res) {
-                if (!res.value || res.value.length === 0) return resolve([]);
+          // async getProductReferences(elementDef) {
+          //   const browser = this.api;
+          //   return new Promise((resolve, reject) => {
+          //     browser.elements(elementDef.locateStrategy, elementDef.selector, function(res) {
+          //       if (!res.value || res.value.length === 0) return resolve([]);
           
-                const refs = [];
-                let processed = 0;
+          //       const refs = [];
+          //       let processed = 0;
           
-                res.value.forEach((el, idx) => {
-                  const elementId = el.ELEMENT || el['element-6066-11e4-a52e-4f735466cecf'];
+          //       res.value.forEach((el, idx) => {
+          //         const elementId = el.ELEMENT || el['element-6066-11e4-a52e-4f735466cecf'];
           
-                  if (elementId) {
-                    // click each product link to open details
-                    browser.elementIdClick(elementId, function() {
-                      browser
-                        .waitForElementVisible('#product_reference span[itemprop="sku"]', 5000)
-                        .getText('#product_reference span[itemprop="sku"]', function(result) {
-                          const refNumber = parseInt(result.value.replace('demo_', ''), 10);
-                          refs[idx] = refNumber; // preserve order
-                          processed++;
+          //         if (elementId) {
+          //           // click each product link to open details
+          //           browser.elementIdClick(elementId, function() {
+          //             browser
+          //               .waitForElementVisible('#product_reference span[itemprop="sku"]', 5000)
+          //               .getText('#product_reference span[itemprop="sku"]', function(result) {
+          //                 const refNumber = parseInt(result.value.replace('demo_', ''), 10);
+          //                 refs[idx] = refNumber; // preserve order
+          //                 processed++;
           
-                          // go back to list
-                          browser.back().pause(1000, function() {
-                            if (processed === res.value.length) {
-                              resolve(refs);
-                            }
-                          });
-                        });
-                    });
-                  }
-                });
-              });
-            });
-          },
+          //                 // go back to list
+          //                 browser.back().pause(1000, function() {
+          //                   if (processed === res.value.length) {
+          //                     resolve(refs);
+          //                   }
+          //                 });
+          //               });
+          //           });
+          //         }
+          //       });
+          //     });
+          //   });
+          // },
           
           async getProductPrices() {
             const browser = this.api;
