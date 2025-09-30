@@ -266,18 +266,7 @@ describe('Contact Us Page Tests - POM', function () {
       .assertErrorMessage(data.invalidMessage);
   });
 
-  /*Test 6: Message with only whitespace
-
-  // Expected: Should show "The message cannot be blank."*/
-  // it('Should show error when message contains only whitespace', function (browser) {
-  //   const contactPage = browser.page.contactUsPage();
-
-  //   contactPage
-  //     .fillForm('2', data.validEmail, data.validOrderRef, data.whitespaceMessage)
-  //     .submit()
-  //     .assertErrorMessage(data.invalidMessage);
-  // });
-
+  
   /* Test 7: Missing subject heading
 
   // Expected: Should show "Please select a subject from the list provided."*/
@@ -303,19 +292,7 @@ describe('Contact Us Page Tests - POM', function () {
       .assertSuccessMessage(data.successfullySent);
   });
 
-  /* Test 9: Email looks valid but has extra characters
-  //
-  // Expected: Should show "Invalid email address."*/
-  // it('Should show error when email looks like valid but has extra characters', function (browser) {
-  //   const contactPage = browser.page.contactUsPage();
-
-  //   contactPage
-  //     .fillForm('2', data.weirdInvalidEmail, data.validOrderRef, data.validMessage)
-  //     .submit()
-  //     .waitForElementVisible('@errorAlert', 5000)
-  //     .assert.containsText('@errorItem', 'Invalid email address.');
-  // });
-
+  
   /* Test 10: Max local-part email (64 chars before @)
   //
   // Expected: Should be accepted and show success*/
