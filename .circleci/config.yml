@@ -3,12 +3,14 @@ version: 2.1
 jobs:
   ui-tests:
     docker:
-      - image: cimg/node:18.20-browsers  # Node.js with Chrome/Firefox preinstalled
+      - image: cimg/node:18.20-browsers   # Node.js with Chrome & Firefox
     steps:
       - checkout
-      - run: npm install
       - run:
-          name: Run Nightwatch UI tests
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run Nightwatch tests
           command: npx nightwatch
 
 workflows:
