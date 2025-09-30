@@ -58,16 +58,9 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         'goog:chromeOptions': {
-          binary: process.env.CHROME_BIN || '/usr/bin/google-chrome',
-          args: [
-            '--headless',
-            '--no-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-gpu',
-            '--window-size=1920,1080'
-          ],
-          binary: process.env.CHROME_BIN || "/usr/bin/google-chrome"
-        }
+  binary: process.env.CHROME_BIN || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  args: ['--headless', '--disable-gpu', '--window-size=1920,1080']
+}
       },
       reporter: (results, done) => {
         reporter.fn(results, done);
