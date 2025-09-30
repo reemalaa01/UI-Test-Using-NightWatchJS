@@ -56,14 +56,15 @@ module.exports = {
       },
 
       desiredCapabilities: {
-        browserName : 'chrome',
+        browserName: 'chrome',
         'goog:chromeOptions': {
+          binary: process.env.CHROME_BIN || '/usr/bin/google-chrome',
           args: [
-            "--headless",
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-            "--window-size=1920,1080"
+            '--headless',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--window-size=1920,1080'
           ]
         }
       },
