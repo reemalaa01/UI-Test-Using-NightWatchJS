@@ -23,38 +23,7 @@ describe('Search Module', function() {
     });
   });
 
-  /* Test 2: Verify search results contain the word "Dress"
-  //
-  // Expected: Each product name should include "Dress"*/
-  // it('Should search for "dress" and show it in results', async function(browser) {
-  //   const names = await searchPage.getProductTexts('@productNames');
-  //   console.log('Products found:', names.length, names);
-
-  //   names.forEach((name, index) => {
-  //     browser.assert.ok(
-  //       name.includes('Dress'),
-  //       `Product ${index + 1}: "${name}" should include the word "Dress"`
-  //     );
-  //   });
-  // });
-
-  /*Test 3: Verify sort by lowest price
-  //
-  // Expected: Prices should be sorted ascending*/
-  // it('Should sort products by lowest price first', async function(browser) {
-  //   await searchPage.sortBy('price:asc');
-  //   const prices = await searchPage.getProductPrices();
-  //   await searchPage.assertSortedAscending(prices, 'Prices should be sorted ascending');
-  // });
-
-  /* Test 4: Verify sort by highest price
-  //
-  // Expected: Prices should be sorted descending*/
-  // it('Should sort products by highest price first', async function(browser) {
-  //   await searchPage.sortBy('price:desc');
-  //   const prices = await searchPage.getProductPrices();
-  //   await searchPage.assertSortedDescending(prices, 'Prices should be sorted descending');
-  // });
+  
 
   /*Test 5: Verify sort alphabetically A → Z
   //
@@ -117,23 +86,7 @@ describe('Search Module', function() {
     }
   });
 
-  /* Test 9: Verify sort by reference (lowest first)
-  //
-  // Expected: References should be sorted ascending*/
-  // it('Should sort products by reference (lowest first)', async function(browser) {
-  //   await searchPage.sortBy('reference:asc');
-  //   const refs = await searchPage.getProductReferences(searchPage.elements.productLinks);
-  //   await searchPage.assertSortedAscending(refs, 'References should be ascending');
-  // });
-
-  // /*Test 10: Verify sort by reference (highest first)
-  // //
-  // // Expected: References should be sorted descending*/
-  // it.skip('Should sort products by reference (highest first)', async function(browser) {
-  //   await searchPage.sortBy('reference:desc');
-  //   const refs = await searchPage.getProductReferences(searchPage.elements.productLinks);
-  //   await searchPage.assertSortedDescending(refs, 'References should be descending');
-  // });
+ 
 
   /* Test 11: Verify case-insensitive search
   //
