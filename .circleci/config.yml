@@ -3,27 +3,30 @@ version: 2.1
 jobs:
   ui-tests:
     docker:
-      - image: cimg/node:22.4.0-browsers  # Node 22 + browsers preinstalled
+      - image: cimg/node:22.4.0-browsers  # Node 22 + Chrome preinstalled
+    environment:
+      # Chrome binary for Nightwatch headless
+      CHROME_BIN: /usr/bin/google-chrome-stable
     steps:
       - checkout
 
-      # Print Node, npm, Firefox versions for debugging
-      - run:
-          name: Check Node, npm, Firefox
-          command: |
-            node -v
-            npm -v
-            firefox --version
-
-      # Install dependencies
+      # Install dependencies from package-lock.json
       - run:
           name: Install dependencies
           command: npm ci
 
-      # Run Nightwatch tests with Firefox headless
+      # Verify Node, npm, and Chrome versions
+      - run:
+          name: Check Node, npm, Chrome
+          command: |
+            node -v
+            npm -v
+            $CHROME_BIN --version
+
+      # Run Nightwatch tests
       - run:
           name: Run Nightwatch tests
-          command: npx nightwatch --env firefox
+          command: npx nightwatch --env chrome
 
 workflows:
   version: 2
