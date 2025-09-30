@@ -8,6 +8,7 @@ jobs:
       # Chrome binary for Nightwatch headless
       CHROME_BIN: /usr/bin/google-chrome
     steps:
+      - browser-tools/install-browser-tools
       - checkout
 
       # Install dependencies from package-lock.json
@@ -17,7 +18,7 @@ jobs:
 
       # Verify Node, npm, and Chrome versions
       - run:
-          name: Check Node, npm, Chrome1
+          name: Check Node, npm, Chrome2
           command: |
             node -v
             npm -v
