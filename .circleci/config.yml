@@ -17,7 +17,7 @@ jobs:
 
       # Verify Node, npm, and Chrome versions
       - run:
-          name: Check Node, npm, Chrome
+          name: Check Node, npm, Chrome1
           command: |
             node -v
             npm -v
