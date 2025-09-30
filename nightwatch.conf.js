@@ -56,7 +56,16 @@ module.exports = {
       },
 
       desiredCapabilities: {
-        browserName : 'chrome'
+        browserName : 'chrome',
+        'goog:chromeOptions': {
+          args: [
+            "--headless",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--window-size=1920,1080"
+          ]
+        }
       },
       reporter: (results, done) => {
         reporter.fn(results, done);
