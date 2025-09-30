@@ -1,0 +1,18 @@
+{
+  "name": "nightwatchjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chromedriver": "^140.0.4",
+    "nightwatch": "^3.12.2"
+  },
+  "devDependencies": {
+    "nightwatch-html-reporter": "^2.0.6"
+  }
+}
