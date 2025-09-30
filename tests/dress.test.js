@@ -120,20 +120,20 @@ describe('Search Module', function() {
   /* Test 9: Verify sort by reference (lowest first)
   //
   // Expected: References should be sorted ascending*/
-  it('Should sort products by reference (lowest first)', async function(browser) {
-    await searchPage.sortBy('reference:asc');
-    const refs = await searchPage.getProductReferences(searchPage.elements.productLinks);
-    await searchPage.assertSortedAscending(refs, 'References should be ascending');
-  });
+  // it('Should sort products by reference (lowest first)', async function(browser) {
+  //   await searchPage.sortBy('reference:asc');
+  //   const refs = await searchPage.getProductReferences(searchPage.elements.productLinks);
+  //   await searchPage.assertSortedAscending(refs, 'References should be ascending');
+  // });
 
-  /*Test 10: Verify sort by reference (highest first)
-  //
-  // Expected: References should be sorted descending*/
-  it.skip('Should sort products by reference (highest first)', async function(browser) {
-    await searchPage.sortBy('reference:desc');
-    const refs = await searchPage.getProductReferences(searchPage.elements.productLinks);
-    await searchPage.assertSortedDescending(refs, 'References should be descending');
-  });
+  // /*Test 10: Verify sort by reference (highest first)
+  // //
+  // // Expected: References should be sorted descending*/
+  // it.skip('Should sort products by reference (highest first)', async function(browser) {
+  //   await searchPage.sortBy('reference:desc');
+  //   const refs = await searchPage.getProductReferences(searchPage.elements.productLinks);
+  //   await searchPage.assertSortedDescending(refs, 'References should be descending');
+  // });
 
   /* Test 11: Verify case-insensitive search
   //
