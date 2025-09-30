@@ -5,15 +5,22 @@ jobs:
     docker:
       - image: cimg/node:22.4.0-browsers  # Node 22 + Chrome/Firefox preinstalled
     environment:
+      # Chrome binary for headless
       CHROME_BIN: /usr/bin/google-chrome
     steps:
       - checkout
+
+      # Use npm ci to install dependencies from package-lock.json
       - run:
           name: Install dependencies
           command: npm ci
+
+      # Run Nightwatch tests with headless Chrome
       - run:
           name: Run Nightwatch tests
-          command: npx nightwatch --env chrome_headless
+          command: |
+            export CHROME_BIN=/usr/bin/google-chrome
+            npx nightwatch --env chrome_headless
 
 workflows:
   version: 2
