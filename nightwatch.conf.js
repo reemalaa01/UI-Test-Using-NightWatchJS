@@ -71,6 +71,21 @@ module.exports = {
       reporter: (results, done) => {
         reporter.fn(results, done);
       },
+      chrome_headless: {
+      desiredCapabilities: {
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+          binary: process.env.CHROME_BIN || '/usr/bin/google-chrome',
+          args: [
+            '--headless',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--window-size=1920,1080'
+          ]
+        }
+      }
+    },
  // Add reporters here
 //  reporters: [
 //   'junit',          // XML format
