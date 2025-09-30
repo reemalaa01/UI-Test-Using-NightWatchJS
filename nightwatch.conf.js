@@ -92,16 +92,14 @@ module.exports = {
     
 
     firefox: {
-      desiredCapabilities : {
-        browserName : 'firefox',
-        acceptInsecureCerts: true,
-        'moz:firefoxOptions': {
-          args: [
-            // '-headless',
-            // '-verbose'
-          ]
-        }
-      },
+      firefox_headless: {
+  desiredCapabilities: {
+    browserName: 'firefox',
+    'moz:firefoxOptions': {
+      args: ['-headless', '--width=1920', '--height=1080']
+    }
+  }
+},
       webdriver: {
         start_process: true,
         server_path: '',
