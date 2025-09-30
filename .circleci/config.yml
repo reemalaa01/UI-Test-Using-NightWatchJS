@@ -23,9 +23,11 @@ jobs:
 
       # Run Nightwatch tests with Firefox in headless mode
       - run:
-          name: Run Nightwatch tests
-          command: |
-            npx nightwatch --env firefox_headless
+    name: Run Nightwatch tests
+    command: |
+      export CHROME_BIN=/usr/bin/google-chrome
+      npx nightwatch --env chrome_headless
+
 
 workflows:
   version: 2
