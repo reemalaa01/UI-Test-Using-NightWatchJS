@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  ui-tests:
+    docker:
+      - image: cimg/node:18.20-browsers  # Node.js with Chrome/Firefox preinstalled
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: Run Nightwatch UI tests
+          command: npx nightwatch
+
+workflows:
+  version: 2
+  test_pipeline:
+    jobs:
+      - ui-tests
