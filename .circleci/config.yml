@@ -5,19 +5,12 @@ jobs:
     docker:
       - image: cimg/node:18.20-browsers  # includes Chrome & Firefox
     steps:
+      - browser-tools/install-browser-tools
       - checkout
-
-      # Install dependencies
-      - run:
-          name: Install dependencies
-          command: npm install
-
-      # Ensure Chrome is installed (sometimes missing even in browsers image)
-      - run:
-          name: Install Google Chrome
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y google-chrome-stable || true
+      - run: |
+          node --version
+          java --version
+          google-chrome --version
 
       # Run Nightwatch tests
       - run:
