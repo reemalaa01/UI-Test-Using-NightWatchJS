@@ -3,20 +3,20 @@
             failures="0"
             tests="0">
 
-  <testsuite name="sample.test" id="sample.test"
-    errors="1" failures="0" hostname="" package="sample.test" skipped="1"
+  <testsuite name="Contact Us Page Tests - POM" id="sample.test"
+    errors="1" failures="0" hostname="" package="sample.test" skipped="16"
     tests="0" time="0.001000" timestamp="">
   
 
   
     <system-err>
-       An error occurred while creating a new ChromeDriver session: [SessionNotCreatedError] session not created: This version of ChromeDriver only supports Chrome version 140
-Current browser version is 139.0.7258.155 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+       An error occurred while creating a new ChromeDriver session: [SessionNotCreatedError] session not created: This version of ChromeDriver only supports Chrome version 141
+Current browser version is 140.0.7339.208 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
   Verify if ChromeDriver is configured correctly; using:
   {
      start_process: true,
      server_path: &#39;D:\\NightWatchJs\\node_modules\\chromedriver\\lib\\chromedriver\\chromedriver.exe&#39;,
-     port: undefined,
+     port: 9515,
      host: &#39;localhost&#39;,
      ssl: false,
      default_path_prefix: &#39;&#39;,
@@ -30,14 +30,95 @@ Current browser version is 139.0.7258.155 with binary path C:\Program Files\Goog
   
 
     
-    <error message=""><![CDATA[
-      
+    <error message="An error occurred while creating a new ChromeDriver session: [SessionNotCreatedError] session not created: This version of ChromeDriver only supports Chrome version 141
+Current browser version is 140.0.7339.208 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe"><![CDATA[
+      SessionNotCreatedError: An error occurred while creating a new ChromeDriver session: [SessionNotCreatedError] session not created: This version of ChromeDriver only supports Chrome version 141
+Current browser version is 140.0.7339.208 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+    at Object.throwDecodedError (D:\NightWatchJs\node_modules\selenium-webdriver\lib\error.js:521:15)
+    at parseHttpResponse (D:\NightWatchJs\node_modules\selenium-webdriver\lib\http.js:514:13)
+    at Executor.execute (D:\NightWatchJs\node_modules\selenium-webdriver\lib\http.js:446:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
       ]]></error>  
 
   
     
     <testcase
-      name="Sample Test" classname="sample.test">
+      name="Should verify all key form elements are visible" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should display correct description when selecting subject heading" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should not allow submission when all fields are empty" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should show error when invalid email is entered" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should show error when message field is empty with valid email" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should show error when message contains only whitespace" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should show error when subject heading is not selected" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should successfully submit when all fields are valid" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should show error when email looks like valid but has extra characters" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should accept max local-part length email (64 chars before @)" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should accept email with alias (+ sign)" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should accept email with uppercase letters" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should accept large message scenario" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should successfully submit when order reference is too large" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should successfully submit with a valid file attached" classname="Contact Us Page Tests - POM">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Should show error for unsupported file type" classname="Contact Us Page Tests - POM">
       <skipped />
     </testcase>
     

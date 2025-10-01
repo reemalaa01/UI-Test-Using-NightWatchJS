@@ -269,25 +269,14 @@ describe('Contact Us Page Tests - POM', function () {
 /*Test 6: Message with only whitespace
 
   // Expected: Should show "The message cannot be blank."*/
-  it('Should show error when message contains only whitespace', async function (browser) {
-  try {
+  it.skip('Should show error when message contains only whitespace', function (browser) {
     const contactPage = browser.page.contactUsPage();
 
-    await contactPage
+    contactPage
       .fillForm('2', data.validEmail, data.validOrderRef, data.whitespaceMessage)
-      .submit();
-
-    // Get the error message from the page
-    const errorText = await contactPage.getText('@errorItem');
-    if (errorText !== data.invalidMessage) {
-      console.log(`Known bug: Expected "${data.invalidMessage}", but got "${errorText}"`);
-    }
-
-
-  } catch (err) {
-    console.log(`Test skipped due to known bug: ${err.message}`);
-  }
-});
+      .submit()
+      .assertErrorMessage(data.invalidMessage);
+  });
 
   /* Test 7: Missing subject heading
 
@@ -316,27 +305,18 @@ describe('Contact Us Page Tests - POM', function () {
 /* Test 9: Email looks valid but has extra characters
   //
   // Expected: Should show "Invalid email address."*/
-  it('Should show error when email looks like valid but has extra characters', async function (browser) {
-  try {
+  it.skip('Should show error when email looks like valid but has extra characters', function (browser) {
     const contactPage = browser.page.contactUsPage();
 
-    await contactPage
+    contactPage
       .fillForm('2', data.weirdInvalidEmail, data.validOrderRef, data.validMessage)
       .submit()
-      .waitForElementVisible('@errorAlert', 5000);
-
-    // Check for expected error message
-    const errorText = await contactPage.getText('@errorItem');
-    if (errorText !== 'Invalid email address.') {
-      console.log(`Known bug: Expected "Invalid email address.", but got "${errorText}"`);
-    }
+      .waitForElementVisible('@errorAlert', 5000)
+      .assert.containsText('@errorItem', 'Invalid email address.');
+  });
     
     
-    
-  } catch (err) {
-    console.log(`Test skipped due to known bug: ${err.message}`);
-  }
-});
+  
 
   /* Test 10: Max local-part email (64 chars before @)
   //
