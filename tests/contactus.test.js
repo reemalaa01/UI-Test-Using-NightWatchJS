@@ -1,5 +1,5 @@
-  
-const data = require('./data/testdata'); // relative to tests/
+
+const data = require('./data/testdata'); 
 
 describe('Contact Us Page Tests - POM', function () {
 
@@ -7,14 +7,12 @@ describe('Contact Us Page Tests - POM', function () {
     browser.page.contactUsPage().navigate();
   });
 
-  before((browser) => {
-    browser.url('http://automationpractice.multiformis.com/')
-           .waitForElementVisible('body', 5000);
-  });
+  
 
   after((browser) => {
     browser.end();
   });
+  /************************************************************************************************************************************/
 
   /*Test 1: Verify all essential UI elements exist on Contact Us page
   //
@@ -32,6 +30,7 @@ describe('Contact Us Page Tests - POM', function () {
       .assert.containsText('@subHeading', 'SEND A MESSAGE')
       .assert.containsText('@pageHeading', 'CUSTOMER SERVICE - CONTACT US');
   });
+  /************************************************************************************************************************************/
 
   /*Test 2: Verify subject heading shows correct description
   //
@@ -52,6 +51,7 @@ describe('Contact Us Page Tests - POM', function () {
       .waitForElementVisible('#desc_contact1', 5000)
       .assert.containsText('#desc_contact1', 'If a technical problem occurs on this website');
   });
+  /************************************************************************************************************************************/
 
   /* Test 3: Submit with all fields empty
   //
@@ -64,6 +64,7 @@ describe('Contact Us Page Tests - POM', function () {
       .submit()
       .assertErrorMessage(data.invalidEmailAddress);
   });
+  /************************************************************************************************************************************/
 
   /* Test 4: Invalid email format
   //
@@ -76,6 +77,7 @@ describe('Contact Us Page Tests - POM', function () {
       .submit()
       .assertErrorMessage(data.invalidEmailAddress);
   });
+  /************************************************************************************************************************************/
 
   /* Test 5: Empty message with valid email
   //
@@ -88,20 +90,8 @@ describe('Contact Us Page Tests - POM', function () {
       .submit()
       .assertErrorMessage(data.invalidMessage);
   });
-
-/*Test 6: Message with only whitespace
-
-  // Expected: Should show "The message cannot be blank."*/
-  it.skip('Should show error when message contains only whitespace', function (browser) {
-    const contactPage = browser.page.contactUsPage();
-
-    contactPage
-      .fillForm('2', data.validEmail, data.validOrderRef, data.whitespaceMessage)
-      .submit()
-      .assertErrorMessage(data.invalidMessage);
-  });
-
-  /* Test 7: Missing subject heading
+  /************************************************************************************************************************************/
+  /* Test 6: Missing subject heading
 
   // Expected: Should show "Please select a subject from the list provided."*/
   it('Should show error when subject heading is not selected', function (browser) {
@@ -114,7 +104,38 @@ describe('Contact Us Page Tests - POM', function () {
       .assertErrorMessage(data.errorOfSubject);
   });
 
-  /* Test 8: Valid submission
+
+  /************************************************************************************************************************************/
+  /* Test 7: Add all the mandatory field only which is email, message and select subject heading
+
+  // Expected: Should show "Please select a subject from the list provided."*/
+  it('Should submit message successfully when mandatory fields added', function (browser) {
+    const contactPage = browser.page.contactUsPage();
+
+    contactPage
+      .click('@subjectHeading')
+      .click('@subjectCustomerService')
+      .setValue('@email', data.validEmail)
+      .setValue('@message', data.missingSubject)
+      .submit()
+      .assertSuccessMessage(data.successfullySent);
+  });
+
+  /************************************************************************************************************************************/
+  /*Test 8: Message with only whitespace
+
+  // Expected: Should show "The message cannot be blank."*/
+  it.skip('Should show error when message contains only whitespace (BUG)', function (browser) {
+    const contactPage = browser.page.contactUsPage();
+
+    contactPage
+      .fillForm('2', data.validEmail, data.validOrderRef, data.whitespaceMessage)
+      .submit()
+      .assertErrorMessage(data.invalidMessage);
+  });
+  /************************************************************************************************************************************/
+
+  /* Test 9: Valid submission
   //
   // Expected: Should show success message*/
   it('Should successfully submit when all fields are valid', function (browser) {
@@ -125,10 +146,12 @@ describe('Contact Us Page Tests - POM', function () {
       .submit()
       .assertSuccessMessage(data.successfullySent);
   });
-/* Test 9: Email looks valid but has extra characters
-  //
-  // Expected: Should show "Invalid email address."*/
-  it.skip('Should show error when email looks like valid but has extra characters', function (browser) {
+  /************************************************************************************************************************************/
+
+  /* Test 10: Email looks valid but has extra characters
+    //
+    // Expected: Should show "Invalid email address."*/
+  it.skip('Should show error when email looks like valid but has extra characters(BUG)', function (browser) {
     const contactPage = browser.page.contactUsPage();
 
     contactPage
@@ -137,11 +160,8 @@ describe('Contact Us Page Tests - POM', function () {
       .waitForElementVisible('@errorAlert', 5000)
       .assert.containsText('@errorItem', 'Invalid email address.');
   });
-    
-    
-  
-
-  /* Test 10: Max local-part email (64 chars before @)
+  /************************************************************************************************************************************/
+  /* Test 11: Max local-part email (64 chars before @)
   //
   // Expected: Should be accepted and show success*/
   it('Should accept max local-part length email (64 chars before @)', function (browser) {
@@ -152,8 +172,9 @@ describe('Contact Us Page Tests - POM', function () {
       .submit()
       .assertSuccessMessage(data.successfullySent);
   });
+  /************************************************************************************************************************************/
 
-  /* Test 11–13: Other email variations
+  /* Test 12–14: Other email variations
   //
   // Expected: All should succeed*/
   [
@@ -169,8 +190,9 @@ describe('Contact Us Page Tests - POM', function () {
         .assertSuccessMessage(data.successfullySent);
     });
   });
+  /************************************************************************************************************************************/
 
-  /* Test 14: Large order reference
+  /* Test 15: Large order reference
   //
   // Expected: Should still succeed*/
   it('Should successfully submit when order reference is too large', function (browser) {
@@ -181,8 +203,25 @@ describe('Contact Us Page Tests - POM', function () {
       .submit()
       .assertSuccessMessage(data.successfullySent);
   });
+  /************************************************************************************************************************************/
+  /* Test 16–17: Other Order Refrence variations
+    //
+    // Expected: All should succeed*/
+  [
+    { orderRef: data.alphabeticalOrderRef, caseName: "alphabetical order reference" },
+    { orderRef: data.specialCharOrderRef, caseName: "order reference with special characters" },
+  ].forEach(({ orderRef, caseName }) => {
+    it(`Should accept ${caseName}`, function (browser) {
+      const contactPage = browser.page.contactUsPage();
 
-  /* Test 15: Valid file upload
+      contactPage
+        .fillForm('2', data.validEmail, orderRef, data.validMessage)
+        .submit()
+        .assertSuccessMessage(data.successfullySent);
+    });
+  });
+  /************************************************************************************************************************************/
+  /* Test 18: Valid file upload
   //
   // Expected: Should succeed*/
   it('Should successfully submit with a valid file attached', function (browser) {
@@ -196,8 +235,9 @@ describe('Contact Us Page Tests - POM', function () {
       .submit()
       .assertSuccessMessage(data.successfullySent);
   });
+  /************************************************************************************************************************************/
 
-  /* Test 16: Invalid file type upload
+  /* Test 19: Invalid file type upload
   //
   // Expected: Should show "Bad file extension"*/
   it('Should show error for unsupported file type', function (browser) {
@@ -211,5 +251,25 @@ describe('Contact Us Page Tests - POM', function () {
       .submit()
       .assertErrorMessage(data.badExtension);
   });
+  /************************************************************************************************************************************/
+  /* Test 20: Replace invalid file by directly attaching valid file afterwards
+  //
+  // Expected: Should succeed after valid file is attached */
+  it('Should succeed after replacing invalid file with valid file', function (browser) {
+    const contactPage = browser.page.contactUsPage();
+    const path = require('path');
+
+    const badFile = path.resolve(__dirname, data.badFileName);
+    const goodFile = path.resolve(__dirname, data.validFileName);
+
+    contactPage
+      .fillForm('2', data.validEmail, data.validOrderRef, data.validMessage)
+      .attachFile(badFile)
+      .attachFile(goodFile)
+      .submit()
+      .assertSuccessMessage(data.successfullySent);
+  });
+  /************************************************************************************************************************************/
+
 
 });
